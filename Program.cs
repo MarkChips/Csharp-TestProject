@@ -1,19 +1,62 @@
-﻿string permission = "bob";
-int level = 56;
+﻿/*
+In this challenge, you'll rewrite an if-elseif-else construct as a switch statement. This challenge should help you see the strengths/weaknesses of the switch statement when compared to an if-elseif-else construct. Good luck.
+*/
 
-if (permission.Contains("Admin"))
+// SKU = Stock Keeping Unit. 
+// SKU value format: <product #>-<2-letter color code>-<size code>
+string sku = "01-MN-L";
+
+string[] product = sku.Split('-');
+
+string type = "";
+string color = "";
+string size = "";
+
+if (product[0] == "01")
 {
-    if (level > 55)
-        Console.WriteLine("Welcome, Super Admin user.");
-    else
-        Console.WriteLine("Welcome, Admin user.");
+    type = "Sweat shirt";
 }
-else if (permission.Contains("Manager"))
+else if (product[0] == "02")
 {
-    if (level >= 20)
-        Console.WriteLine("Contact an Admin for access.");
-    else
-        Console.WriteLine("You do not have sufficient privileges.");
+    type = "T-Shirt";
+}
+else if (product[0] == "03")
+{
+    type = "Sweat pants";
 }
 else
-    Console.WriteLine("You do not have sufficient privileges.");
+{
+    type = "Other";
+}
+
+if (product[1] == "BL")
+{
+    color = "Black";
+}
+else if (product[1] == "MN")
+{
+    color = "Maroon";
+}
+else
+{
+    color = "White";
+}
+
+if (product[2] == "S")
+{
+    size = "Small";
+}
+else if (product[2] == "M")
+{
+    size = "Medium";
+}
+else if (product[2] == "L")
+{
+    size = "Large";
+}
+else
+{
+    size = "One Size Fits All";
+}
+
+Console.WriteLine($"Product: {size} {color} {type}");
