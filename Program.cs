@@ -1,60 +1,18 @@
-﻿/*
-In this challenge, you'll rewrite an if-elseif-else construct as a switch statement. This challenge should help you see the strengths/weaknesses of the switch statement when compared to an if-elseif-else construct. Good luck.
-*/
+﻿Random random = new();
 
-// SKU = Stock Keeping Unit. 
-// SKU value format: <product #>-<2-letter color code>-<size code>
-string sku = "01-MN-L";
+int hero = 10, monster = 10;
 
-string[] product = sku.Split('-');
-
-string type = "";
-string color = "";
-string size = "";
-
-switch (product[0])
+do
 {
-    case "01":
-        type = "Sweat shirt";
-        break;
-    case "02":
-        type = "T-Shirt";
-        break;
-    case "03":
-        type = "Sweat pants";
-        break;
-    default:
-        type = "Other";
-        break;
-}
+    int attack = random.Next(1, 11);
 
-switch (product[1])
-{
-    case "BL":
-        color = "Black";
-        break;
-    case "MN":
-        color = "Maroon";
-        break;
-    default:
-        color = "White";
-        break;
-}
+    monster -= attack;
+    Console.WriteLine($"Monster was damaged and lost {attack} health and now has {monster} health.");
 
-switch (product[2])
-{
-    case "S":
-        size = "Small";
-        break;
-    case "M":
-        size = "Medium";
-        break;
-    case "L":
-        size = "Large";
-        break;
-    default:
-        size = "One Size Fits All";
-        break;
-}
+    if (monster <= 0) break;
 
-Console.WriteLine($"Product: {size} {color} {type}");
+    hero -= attack;
+    Console.WriteLine($"Hero was damaged and lost {attack} health and now has {hero} health.");
+} while (hero > 0);
+
+Console.WriteLine(hero > 0 ? "Hero wins!🤺" : "Monster wins!👹");
