@@ -28,7 +28,7 @@ do
 
 Console.WriteLine($"Your input value ({result}) has been accepted."); */
 
-// Code project 2 - write code that validates string input
+/* // Code project 2 - write code that validates string input
 
 bool validEntry = false;
 string? result = null;
@@ -55,4 +55,26 @@ do
     Console.WriteLine($"The role name that you entered, \"{userInput}\" is not valid. Enter your role name (Administrator, Manager, or User):");
 } while (!validEntry);
 
-Console.WriteLine($"Your input value ({result}) has been accepted.");
+Console.WriteLine($"Your input value ({result}) has been accepted."); */
+
+// Code project 3 - Write code that processes the contents of a string array
+
+string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
+
+foreach (string myString in myStrings)
+{
+    string myStringCopy = myString, currentSentence;
+    int periodLocation = myStringCopy.IndexOf(".");
+
+    while (periodLocation != -1)
+    {
+        currentSentence = myStringCopy.Remove(periodLocation);
+
+        myStringCopy = myStringCopy.Substring(periodLocation + 1).TrimStart();
+        periodLocation = myStringCopy.IndexOf(".");
+
+        Console.WriteLine(currentSentence);
+    }
+    currentSentence = myStringCopy.Trim();
+    Console.WriteLine(currentSentence);
+}
