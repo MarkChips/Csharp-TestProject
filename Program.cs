@@ -1,18 +1,29 @@
-﻿Random random = new();
+﻿// Code project 1 - write code that validates integer input
 
-int hero = 10, monster = 10;
+string? readResult;
+bool validEntry = false;
+int? result = null;
 
+Console.WriteLine("Enter an integer value between 5 and 10:");
 do
 {
-    int attack = random.Next(1, 11);
+    readResult = Console.ReadLine();
+    if (int.TryParse(readResult, out int userNumber))
+    {
+        if (userNumber > 5 && userNumber < 10)
+        {
+            result = userNumber;
+            validEntry = true;
+        }
+        else
+        {
+            Console.WriteLine($"You entered {userNumber}. Please enter a number between 5 and 10:");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Sorry, you entered an invalid number, please try again:");
+    }
+} while (!validEntry);
 
-    monster -= attack;
-    Console.WriteLine($"Monster was damaged and lost {attack} health and now has {monster} health.");
-
-    if (monster <= 0) break;
-
-    hero -= attack;
-    Console.WriteLine($"Hero was damaged and lost {attack} health and now has {hero} health.");
-} while (hero > 0);
-
-Console.WriteLine(hero > 0 ? "Hero wins!🤺" : "Monster wins!👹");
+Console.WriteLine($"Your input value ({result}) has been accepted.");
