@@ -1,80 +1,14 @@
-﻿/* // Code project 1 - write code that validates integer input
+﻿Console.WriteLine("Signed integral types:");
 
-string? readResult;
-bool validEntry = false;
-int? result = null;
+Console.WriteLine($"sbyte  : {sbyte.MinValue} to {sbyte.MaxValue}");
+Console.WriteLine($"short  : {short.MinValue} to {short.MaxValue}");
+Console.WriteLine($"int    : {int.MinValue} to {int.MaxValue}");
+Console.WriteLine($"long   : {long.MinValue} to {long.MaxValue}");
 
-Console.WriteLine("Enter an integer value between 5 and 10:");
-do
-{
-    readResult = Console.ReadLine();
-    if (int.TryParse(readResult, out int userNumber))
-    {
-        if (userNumber > 5 && userNumber < 10)
-        {
-            result = userNumber;
-            validEntry = true;
-        }
-        else
-        {
-            Console.WriteLine($"You entered {userNumber}. Please enter a number between 5 and 10:");
-        }
-    }
-    else
-    {
-        Console.WriteLine("Sorry, you entered an invalid number, please try again:");
-    }
-} while (!validEntry);
+Console.WriteLine("");
+Console.WriteLine("Unsigned integral types:");
 
-Console.WriteLine($"Your input value ({result}) has been accepted."); */
-
-/* // Code project 2 - write code that validates string input
-
-bool validEntry = false;
-string? result = null;
-
-Console.WriteLine("Enter your role name (Administrator, Manager, or User):");
-do
-{
-    string[] roles = { "administrator", "manager", "user" };
-    string? userInput = Console.ReadLine(), testCase;
-
-    if (userInput != null)
-    {
-        testCase = userInput.Trim().ToLower();
-        foreach (string role in roles)
-            if (testCase == role)
-            {
-                result = userInput.Trim();
-                validEntry = true;
-                break;
-            }
-        if (validEntry) continue;
-    }
-
-    Console.WriteLine($"The role name that you entered, \"{userInput}\" is not valid. Enter your role name (Administrator, Manager, or User):");
-} while (!validEntry);
-
-Console.WriteLine($"Your input value ({result}) has been accepted."); */
-
-// Code project 3 - Write code that processes the contents of a string array
-
-string[] myStrings = new string[2] { "I like pizza. I like roast chicken. I like salad", "I like all three of the menu choices" };
-
-foreach (string myString in myStrings)
-{
-    string myStringCopy = myString, currentSentence;
-    int periodLocation = myStringCopy.IndexOf(".");
-
-    while (periodLocation != -1)
-    {
-        currentSentence = myStringCopy.Remove(periodLocation);
-
-        myStringCopy = myStringCopy.Substring(periodLocation + 1).TrimStart();
-        periodLocation = myStringCopy.IndexOf(".");
-
-        Console.WriteLine(currentSentence);
-    }
-    currentSentence = myStringCopy.Trim();
-    Console.WriteLine(currentSentence);
-}
+Console.WriteLine($"byte   : {byte.MinValue} to {byte.MaxValue}");
+Console.WriteLine($"ushort : {ushort.MinValue} to {ushort.MaxValue}");
+Console.WriteLine($"uint   : {uint.MinValue} to {uint.MaxValue}");
+Console.WriteLine($"ulong  : {ulong.MinValue} to {ulong.MaxValue}");
