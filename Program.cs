@@ -1,30 +1,50 @@
-﻿string customerName = "Ms. Barros";
+﻿string message = "(What if) I have [different symbols] but every {open symbol} needs a [matching closing symbol]?";
 
-string currentProduct = "Magic Yield";
-int currentShares = 2975000;
-decimal currentReturn = 0.1275m;
-decimal currentProfit = 55000000.0m;
+// The IndexOfAny() helper method requires a char array of characters. 
+// You want to look for:
 
-string newProduct = "Glorious Future";
-decimal newReturn = 0.13125m;
-decimal newProfit = 63000000.0m;
+char[] openSymbols = { '[', '{', '(' };
 
-Console.WriteLine($"Dear {customerName},");
-Console.WriteLine($"As a customer of our {currentProduct} offering we are excited to tell you about a new financial product that would dramatically increase your return.\n");
-Console.WriteLine($"Currently, you own {currentShares:N} shares at a return of {currentReturn:P}.\n");
-Console.WriteLine($"Our new product, {newProduct} offers a return of {newReturn:P}.  Given your current volume, your potential profit would be {newProfit:C}.\n");
+// You'll use a slightly different technique for iterating through 
+// the characters in the string. This time, use the closing 
+// position of the previous iteration as the starting index for the 
+//next open symbol. So, you need to initialize the closingPosition 
+// variable to zero:
 
-Console.WriteLine("Here's a quick comparison:\n");
+int closingPosition = 0;
 
-string comparisonMessage = "";
+while (true)
+{
+    int openingPosition = message.IndexOfAny(openSymbols, closingPosition);
 
-comparisonMessage = currentProduct.PadRight(20);
-comparisonMessage += String.Format("{0:P}", currentReturn).PadRight(10);
-comparisonMessage += String.Format("{0:C}", currentProfit).PadRight(20);
+    if (openingPosition == -1) break;
 
-comparisonMessage += "\n";
-comparisonMessage += newProduct.PadRight(20);
-comparisonMessage += String.Format("{0:P}", newReturn).PadRight(10);
-comparisonMessage += String.Format("{0:C}", newProfit).PadRight(20);
+    string currentSymbol = message.Substring(openingPosition, 1);
 
-Console.WriteLine(comparisonMessage);
+    // Now  find the matching closing symbol
+    char matchingSymbol = ' ';
+
+    switch (currentSymbol)
+    {
+        case "[":
+            matchingSymbol = ']';
+            break;
+        case "{":
+            matchingSymbol = '}';
+            break;
+        case "(":
+            matchingSymbol = ')';
+            break;
+    }
+
+    // To find the closingPosition, use an overload of the IndexOf method to specify 
+    // that the search for the matchingSymbol should start at the openingPosition in the string. 
+
+    openingPosition += 1;
+    closingPosition = message.IndexOf(matchingSymbol, openingPosition);
+
+    // Finally, use the techniques you've already learned to display the sub-string:
+
+    int length = closingPosition - openingPosition;
+    Console.WriteLine(message.Substring(openingPosition, length));
+}
