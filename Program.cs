@@ -1,50 +1,27 @@
-﻿string message = "(What if) I have [different symbols] but every {open symbol} needs a [matching closing symbol]?";
+﻿const string input = "<div><h2>Widgets &trade;</h2><span>5000</span></div>";
 
-// The IndexOfAny() helper method requires a char array of characters. 
-// You want to look for:
+string quantity = "";
+string output = "";
 
-char[] openSymbols = { '[', '{', '(' };
+// Set the quantity variable to the value obtained by extracting the text between the <span> and </span> tags.
+const string span = "<span>";
+const string spanEnd = "</span>";
+int start = input.IndexOf(span) + span.Length;
+int length = input.IndexOf(spanEnd) - start;
 
-// You'll use a slightly different technique for iterating through 
-// the characters in the string. This time, use the closing 
-// position of the previous iteration as the starting index for the 
-//next open symbol. So, you need to initialize the closingPosition 
-// variable to zero:
+quantity = "Quantity: " + input.Substring(start, length);
 
-int closingPosition = 0;
+// Replace the HTML character (&trade) with (&reg) in the output variable.
+output = input.Replace("&trade", "&reg");
 
-while (true)
-{
-    int openingPosition = message.IndexOfAny(openSymbols, closingPosition);
+// Set the output variable to the value of input, then remove the <div> and </div> tags.
+const string div = "<div>";
+start = output.IndexOf(div);
+output = output.Remove(start, div.Length);
 
-    if (openingPosition == -1) break;
+const string divEnd = "</div>";
+start = output.IndexOf(divEnd);
+output = "Output: " + output.Remove(start, divEnd.Length);
 
-    string currentSymbol = message.Substring(openingPosition, 1);
-
-    // Now  find the matching closing symbol
-    char matchingSymbol = ' ';
-
-    switch (currentSymbol)
-    {
-        case "[":
-            matchingSymbol = ']';
-            break;
-        case "{":
-            matchingSymbol = '}';
-            break;
-        case "(":
-            matchingSymbol = ')';
-            break;
-    }
-
-    // To find the closingPosition, use an overload of the IndexOf method to specify 
-    // that the search for the matchingSymbol should start at the openingPosition in the string. 
-
-    openingPosition += 1;
-    closingPosition = message.IndexOf(matchingSymbol, openingPosition);
-
-    // Finally, use the techniques you've already learned to display the sub-string:
-
-    int length = closingPosition - openingPosition;
-    Console.WriteLine(message.Substring(openingPosition, length));
-}
+Console.WriteLine(quantity);
+Console.WriteLine(output);
